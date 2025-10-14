@@ -9,18 +9,18 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #e0e0e0; /* Light gray for page background */
+      background-color: #e0e0e0; /* Light gray background */
     }
 
     /* Top Bar */
     .top-bar {
-      background-color: #0d1b2a; /* Dark Blue theme */
+      background-color: #0d1b2a; /* Dark blue theme */
       color: #fff;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0.5rem 1rem;
-      font-size: 0.9rem;
+      gap: 1rem;
     }
 
     .top-bar .left, .top-bar .center, .top-bar .right {
@@ -31,14 +31,14 @@
 
     .top-bar .logo {
       font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
 
     .top-bar button {
       background-color: transparent;
       color: #fff;
       border: 1px solid #fff;
-      padding: 0.2rem 0.6rem;
+      padding: 0.3rem 0.7rem;
       border-radius: 5px;
       cursor: pointer;
     }
@@ -46,6 +46,16 @@
     .top-bar button:hover {
       background-color: #fff;
       color: #0d1b2a;
+      transition: 0.3s;
+    }
+
+    .top-bar .search-bar {
+      width: 300px; /* Long search bar */
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
     }
 
     /* Navigation Bar */
@@ -165,12 +175,12 @@
 <div class="top-bar">
   <div class="left">
     <div class="logo">StreetCred</div>
-  </div>
-  <div class="center">
     <button>Menu</button>
   </div>
+  <div class="center">
+    <input type="text" placeholder="Search projects..." class="search-bar">
+  </div>
   <div class="right">
-    <button>Search</button>
     <button>Featured</button>
     <button>Sign In</button>
     <button>EN</button>
@@ -236,6 +246,3 @@
 
 </body>
 </html>
-
-
-
