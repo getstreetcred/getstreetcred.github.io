@@ -9,33 +9,69 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f7f7f7;
+      background-color: #e0e0e0; /* Light gray for page background */
     }
 
-    /* Header / Navigation */
-    header {
-      background-color: #4a148c;
+    /* Top Bar */
+    .top-bar {
+      background-color: #0d1b2a; /* Dark Blue theme */
       color: #fff;
-      padding: 1rem 0;
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
     }
 
-    header nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    .top-bar .left, .top-bar .center, .top-bar .right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .top-bar .logo {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .top-bar button {
+      background-color: transparent;
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 0.2rem 0.6rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .top-bar button:hover {
+      background-color: #fff;
+      color: #0d1b2a;
+    }
+
+    /* Navigation Bar */
+    .nav-bar {
+      background-color: #1b2a48; /* Slightly lighter dark blue */
+      color: #fff;
       display: flex;
       justify-content: center;
-      gap: 2rem;
+      padding: 0.7rem 0;
     }
 
-    header nav ul li a {
+    .nav-bar ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-bar ul li a {
       color: #fff;
       text-decoration: none;
       font-weight: bold;
     }
 
-    header nav ul li a:hover {
+    .nav-bar ul li a:hover {
       text-decoration: underline;
     }
 
@@ -49,16 +85,16 @@
 
     .category {
       padding: 0.5rem 1rem;
-      border: 1px solid #4a148c;
+      border: 1px solid #0d1b2a;
       background-color: #fff;
-      color: #4a148c;
+      color: #0d1b2a;
       cursor: pointer;
       border-radius: 20px;
       font-weight: bold;
     }
 
     .category:hover {
-      background-color: #4a148c;
+      background-color: #0d1b2a;
       color: #fff;
       transition: 0.3s;
     }
@@ -118,23 +154,38 @@
     footer {
       text-align: center;
       padding: 1rem;
-      background-color: #4a148c;
+      background-color: #0d1b2a;
       color: #fff;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Projects</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="left">
+    <div class="logo">StreetCred</div>
+  </div>
+  <div class="center">
+    <button>Menu</button>
+  </div>
+  <div class="right">
+    <button>Search</button>
+    <button>Featured</button>
+    <button>Sign In</button>
+    <button>EN</button>
+  </div>
+</div>
+
+<!-- Navigation Bar -->
+<div class="nav-bar">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Projects</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</div>
 
 <!-- Project Categories -->
 <section class="categories">
@@ -185,5 +236,6 @@
 
 </body>
 </html>
+
 
 
