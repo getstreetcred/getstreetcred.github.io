@@ -1,93 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StreetCred — Rate Public Infrastructure</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StreetCred - Public Infrastructure Ratings</title>
   <style>
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f7f8fa;
-      color: #333;
+      background-color: #f7f7f7;
     }
+
+    /* Header / Navigation */
     header {
-      background: #111827;
-      color: white;
+      background-color: #4a148c;
+      color: #fff;
+      padding: 1rem 0;
       text-align: center;
-      padding: 2rem 1rem;
     }
-    header h1 {
+
+    header nav ul {
+      list-style: none;
       margin: 0;
-      font-size: 2.5rem;
-      letter-spacing: 1px;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
     }
-    header p {
-      margin: .3rem 0 0;
-      color: #9ca3af;
+
+    header nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
     }
+
+    header nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Categories */
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .category {
+      padding: 0.5rem 1rem;
+      border: 1px solid #4a148c;
+      background-color: #fff;
+      color: #4a148c;
+      cursor: pointer;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    .category:hover {
+      background-color: #4a148c;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    /* Projects Grid */
     main {
-      max-width: 900px;
-      margin: 2rem auto;
+      max-width: 1000px;
+      margin: 0 auto 2rem auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
       padding: 0 1rem;
     }
+
     .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, .1);
+      background-color: #fff;
+      border-radius: 8px;
       overflow: hidden;
-      transition: transform .2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
+
     .card img {
       width: 100%;
-      height: 180px;
+      height: 220px;
       object-fit: cover;
     }
+
     .card-content {
       padding: 1rem;
+      text-align: center;
     }
+
     .card-content h3 {
-      margin-top: 0;
+      margin: 0.5rem 0;
+      font-size: 1.25rem;
     }
+
+    .card-content p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-top: 0.5rem;
+    }
+
     .stars {
-      color: #facc15;
-      font-size: 1.1rem;
+      margin: 0.5rem 0;
+      color: #fbc02d;
+      font-size: 1rem;
     }
+
+    /* Footer */
     footer {
       text-align: center;
-      padding: 2rem;
-      font-size: .9rem;
-      color: #777;
+      padding: 1rem;
+      background-color: #4a148c;
+      color: #fff;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>StreetCred</h1>
-    <p>The IMDb of Public Infrastructure — because streets deserve ratings too 🚧</p>
-  </header>
 
-  <main>
+<header>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Projects</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Project Categories -->
+<section class="categories">
+  <button class="category">All</button>
+  <button class="category">Metro</button>
+  <button class="category">Airport</button>
+  <button class="category">Expressway</button>
+</section>
+
+<main>
+  <!-- Bangalore Metro -->
   <div class="card">
     <img src="https://images.unsplash.com/photo-1643467220785-49612855af5a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFuZ2Fsb3JlJTIwbWV0cm98ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" 
          alt="Bangalore Metro – Purple Line Extension">
     <div class="card-content">
       <h3>Bangalore Metro – Purple Line Extension</h3>
       <div class="stars">⭐ ⭐ ⭐ ⭐ ☆ (4.0)</div>
-      <p>Clean, modern, and efficient. A big step forward for city commuting, connecting Whitefield to Challaghatta and cutting travel times.</p>
+      <p>Clean, modern, and efficient. A big step forward for city commuting, connecting Whitefield to Challaghatta.</p>
     </div>
   </div>
 
+  <!-- Kempegowda International Airport -->
   <div class="card">
-   <img src="https://images.unsplash.com/photo-1572372815316-fa5474e31ddc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFuZ2Fsb3JlJTIwYWlycG9ydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" 
-       alt="Kempegowda International Airport Terminal 2">
+    <img src="https://images.unsplash.com/photo-1572372815316-fa5474e31ddc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFuZ2Fsb3JlJTIwYWlycG9ydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" 
+         alt="Kempegowda International Airport Terminal 2">
     <div class="card-content">
       <h3>Kempegowda International Airport – Terminal 2</h3>
       <div class="stars">⭐ ⭐ ⭐ ⭐ ⭐ (5.0)</div>
@@ -95,14 +167,23 @@
     </div>
   </div>
 
+  <!-- Bangalore–Mysore Expressway -->
   <div class="card">
-     <img src="https://images.unsplash.com/photo-1736664122802-725053deb1c6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGJhbmdhbG9yZSUyMG15c29yZSUyMGV4cHJlc3N3YXl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" 
-       alt="Bangalore–Mysore Expressway (NH-275)">
+    <img src="https://images.unsplash.com/photo-1736664122802-725053deb1c6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGJhbmdhbG9yZSUyMG15c29yZSUyMGV4cHJlc3N3YXl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" 
+         alt="Bangalore–Mysore Expressway (NH-275)">
     <div class="card-content">
       <h3>Bangalore–Mysore Expressway (NH-275)</h3>
       <div class="stars">⭐ ⭐ ⭐ ⭐ ☆ (4.5)</div>
-      <p>The 118 km access-controlled expressway slashes travel time between Bengaluru and Mysuru to under 90 minutes — a game-changer for commuters and logistics.</p>
+      <p>The 118 km access-controlled expressway reduces travel time between Bengaluru and Mysuru to under 90 minutes — a game-changer for commuters and logistics.</p>
     </div>
   </div>
 </main>
+
+<footer>
+  © 2025 StreetCred. All rights reserved.
+</footer>
+
+</body>
+</html>
+
 
