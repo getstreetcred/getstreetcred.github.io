@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StreetCred — Rate Public Infrastructure</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f8fa;
+      color: #333;
+    }
+    header {
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: .3rem 0 0;
+      color: #9ca3af;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .1);
+      overflow: hidden;
+      transition: transform .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card-content h3 {
+      margin-top: 0;
+    }
+    .stars {
+      color: #facc15;
+      font-size: 1.1rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: .9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>StreetCred</h1>
+    <p>The IMDb of Public Infrastructure — because streets deserve ratings too 🚧</p>
+  </header>
+
+  <main>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1643467220785-49612855af5a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFuZ2Fsb3JlJTIwbWV0cm98ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" 
+         alt="Bangalore Metro – Purple Line Extension">
+    <div class="card-content">
+      <h3>Bangalore Metro – Purple Line Extension</h3>
+      <div class="stars">⭐ ⭐ ⭐ ⭐ ☆ (4.0)</div>
+      <p>Clean, modern, and efficient. A big step forward for city commuting, connecting Whitefield to Challaghatta and cutting travel times.</p>
+    </div>
+  </div>
+
+  <div class="card">
+   <img src="https://images.unsplash.com/photo-1572372815316-fa5474e31ddc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFuZ2Fsb3JlJTIwYWlycG9ydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" 
+       alt="Kempegowda International Airport Terminal 2">
+    <div class="card-content">
+      <h3>Kempegowda International Airport – Terminal 2</h3>
+      <div class="stars">⭐ ⭐ ⭐ ⭐ ⭐ (5.0)</div>
+      <p>The new Terminal 2 is a masterpiece of architecture and sustainability — designed as a “Terminal in a Garden” for global travelers.</p>
+    </div>
+  </div>
+
+  <div class="card">
+     <img src="https://images.unsplash.com/photo-1736664122802-725053deb1c6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGJhbmdhbG9yZSUyMG15c29yZSUyMGV4cHJlc3N3YXl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" 
+       alt="Bangalore–Mysore Expressway (NH-275)">
+    <div class="card-content">
+      <h3>Bangalore–Mysore Expressway (NH-275)</h3>
+      <div class="stars">⭐ ⭐ ⭐ ⭐ ☆ (4.5)</div>
+      <p>The 118 km access-controlled expressway slashes travel time between Bengaluru and Mysuru to under 90 minutes — a game-changer for commuters and logistics.</p>
+    </div>
+  </div>
+</main>
