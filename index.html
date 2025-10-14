@@ -3,50 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StreetCred — Infrastructure Ratings Platform</title>
+  <title>StreetCred — Rate Public Infrastructure</title>
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      text-align: center;
-      background: linear-gradient(180deg, #f9f9f9, #eaeaea);
-      color: #333;
       margin: 0;
-      padding: 50px 20px;
+      padding: 0;
+      background: #f7f8fa;
+      color: #333;
     }
-    h1 {
-      font-size: 2.8rem;
-      color: #2c3e50;
+    header {
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
       letter-spacing: 1px;
     }
-    p.tagline {
-      font-size: 1.2rem;
-      margin-top: -10px;
-      color: #555;
+    header p {
+      margin: .3rem 0 0;
+      color: #9ca3af;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 0 1rem;
     }
     .card {
-      max-width: 600px;
-      margin: 50px auto;
-      background: white;
-      padding: 25px;
+      background: #fff;
       border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .1);
+      overflow: hidden;
+      transition: transform .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card-content h3 {
+      margin-top: 0;
+    }
+    .stars {
+      color: #facc15;
+      font-size: 1.1rem;
     }
     footer {
-      margin-top: 60px;
-      font-size: 0.9rem;
+      text-align: center;
+      padding: 2rem;
+      font-size: .9rem;
       color: #777;
     }
   </style>
 </head>
 <body>
-  <h1>StreetCred</h1>
-  <p class="tagline">The IMDb of Public Infrastructure — because streets deserve ratings too 🚧</p>
+  <header>
+    <h1>StreetCred</h1>
+    <p>The IMDb of Public Infrastructure — because streets deserve ratings too 🚧</p>
+  </header>
 
-  <div class="card">
-    <h2>Coming Soon</h2>
-    <p>We’re building a platform where citizens can rate and review public infrastructure — 
-       from metro stations to flyovers. Stay tuned!</p>
-  </div>
+  <main>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d" alt="Metro Station">
+      <div class="card-content">
+        <h3>Bangalore Metro – Purple Line Extension</h3>
+        <div class="stars">⭐ ⭐ ⭐ ⭐ ☆ (4.0)</div>
+        <p>Clean, modern, and efficient. A big step forward for city commuting.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1581093588401-22d8a2f5f6df" alt="Flyover">
+      <div class="card-content">
+        <h3>Hebbal Flyover Expansion</h3>
+        <div class="stars">⭐ ⭐ ⭐ ☆ ☆ (3.0)</div>
+        <p>Helps reduce congestion but still under heavy load during peak hours.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791" alt="Park">
+      <div class="card-content">
+        <h3>Cubbon Park Revitalization</h3>
+        <div class="stars">⭐ ⭐ ⭐ ⭐ ⭐ (5.0)</div>
+        <p>Beautiful landscaping and excellent upkeep — a model for urban greenspaces.</p>
+      </div>
+    </div>
+  </main>
 
   <footer>© 2025 StreetCred. All rights reserved.</footer>
 </body>
