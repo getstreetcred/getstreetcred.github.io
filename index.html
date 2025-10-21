@@ -1,244 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>StreetCred - Public Infrastructure Ratings</title>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNXQ6MD58D"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JNXQ6MD58D', { 'anonymize_ip': true });
+  </script>
 
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
+      padding: 0;
       background-color: #e0e0e0;
     }
 
-    header {
-      background-color: #0b2545;
-      color: white;
-      padding: 15px 20px;
-      text-align: center;
-      font-size: 1.8em;
-      font-weight: bold;
-      letter-spacing: 1px;
+    .top-bar {
+      background-color: #0d1b2a;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      gap: 1rem;
     }
 
-    .projects {
+    .top-bar .left, .top-bar .center, .top-bar .right {
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .top-bar .logo {
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
+    .top-bar button {
+      background-color: transparent;
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 0.3rem 0.7rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .top-bar button:hover {
+      background-color: #fff;
+      color: #0d1b2a;
+      transition: 0.3s;
+    }
+
+    .top-bar .search-bar {
+      width: 300px;
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+    }
+
+    .nav-bar {
+      background-color: #1b2a48;
+      color: #fff;
+      display: flex;
       justify-content: center;
-      gap: 20px;
-      padding: 40px;
+      padding: 0.7rem 0;
+    }
+
+    .nav-bar ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-bar ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-bar ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .category {
+      padding: 0.5rem 1rem;
+      border: 1px solid #0d1b2a;
+      background-color: #fff;
+      color: #0d1b2a;
+      cursor: pointer;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    .category:hover {
+      background-color: #0d1b2a;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto 2rem auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 0 1rem;
     }
 
     .card {
-      background: white;
-      border-radius: 10px;
-      width: 320px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      background-color: #fff;
+      border-radius: 8px;
       overflow: hidden;
-      text-align: center;
-      transition: transform 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
     .card img {
       width: 100%;
-      height: 200px;
+      height: 220px;
       object-fit: cover;
     }
 
-    .card h3 {
-      color: #0b2545;
-    }
-
-    .rate-btn {
-      background-color: #0b2545;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-bottom: 20px;
-    }
-
-    .rate-btn:hover {
-      background-color: #193c74;
-    }
-
-    /* Modal Styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 100;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.5);
-    }
-
-    .modal-content {
-      background-color: white;
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 320px;
+    .card-content {
+      padding: 1rem;
       text-align: center;
     }
 
-    .close {
-      float: right;
-      font-size: 1.4em;
-      cursor: pointer;
+    .card-content h3 {
+      margin: 0.5rem 0;
+      font-size: 1.25rem;
+    }
+
+    .card-content p {
+      font-size: 0.95rem;
       color: #555;
+      margin-top: 0.5rem;
     }
 
     .stars {
-      display: flex;
-      justify-content: center;
-      margin: 15px 0;
-    }
-
-    .star {
-      font-size: 30px;
-      color: #ccc;
+      margin: 0.5rem 0;
+      color: #fbc02d;
+      font-size: 1rem;
       cursor: pointer;
-      transition: color 0.3s;
     }
 
-    .star.selected, .star:hover {
-      color: gold;
+    .stars span:hover,
+    .stars span:hover ~ span {
+      color: #ddd;
     }
 
-    textarea {
-      width: 90%;
-      padding: 8px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      resize: none;
-    }
-
-    button.submit {
-      background-color: #0b2545;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    button.submit:hover {
-      background-color: #193c74;
-    }
-
-    .thank-you {
-      color: green;
-      font-weight: bold;
-      margin-top: 10px;
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #0d1b2a;
+      color: #fff;
     }
   </style>
 </head>
-
 <body>
-  <header>StreetCred</header>
 
-  <div class="projects">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1601119479273-3e3e83a4a3b3?auto=format&fit=crop&q=60&w=600" alt="Bangalore Metro">
-      <h3>Bangalore Metro Purple Line Extension</h3>
-      <p>Connecting East-West Bangalore through the Purple Line, improving connectivity across the city.</p>
-      <button class="rate-btn" onclick="openModal('Bangalore Metro Purple Line Extension')">Rate this project</button>
-    </div>
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="left">
+    <div class="logo">StreetCred</div>
+    <button>Menu</button>
+  </div>
+  <div class="center">
+    <input type="text" placeholder="Search projects..." class="search-bar">
+  </div>
+  <div class="right">
+    <button>Featured</button>
+    <button>Sign In</button>
+    <button>EN</button>
+  </div>
+</div>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1572372815316-fa5474e31ddc?auto=format&fit=crop&q=60&w=600" alt="Airport">
-      <h3>Kempegowda International Airport Terminal 2</h3>
-      <p>India’s first garden-themed terminal featuring sustainable design and increased passenger capacity.</p>
-      <button class="rate-btn" onclick="openModal('Kempegowda International Airport Terminal 2')">Rate this project</button>
-    </div>
+<!-- Navigation Bar -->
+<div class="nav-bar">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Projects</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</div>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1736664122802-725053deb1c6?auto=format&fit=crop&q=60&w=600" alt="Expressway">
-      <h3>Bangalore–Mysore Expressway</h3>
-      <p>Six-lane access-controlled expressway reducing travel time and enhancing intercity connectivity.</p>
-      <button class="rate-btn" onclick="openModal('Bangalore–Mysore Expressway')">Rate this project</button>
+<!-- Project Categories -->
+<section class="categories">
+  <button class="category">All</button>
+  <button class="category">Metro</button>
+  <button class="category">Airport</button>
+  <button class="category">Expressway</button>
+</section>
+
+<main>
+  <div class="card" data-id="metro" data-initial="4">
+    <img src="https://images.unsplash.com/photo-1643467220785-49612855af5a?auto=format&fit=crop&q=60&w=600" alt="Bangalore Metro – Purple Line Extension">
+    <div class="card-content">
+      <h3>Bangalore Metro – Purple Line Extension</h3>
+      <div class="stars" id="stars-metro"></div>
+      <p>Clean, modern, and efficient. A big step forward for city commuting, connecting Whitefield to Challaghatta.</p>
     </div>
   </div>
 
-  <!-- Rating Modal -->
-  <div id="ratingModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h3 id="projectTitle"></h3>
-      <div class="stars" id="starContainer">
-        <span class="star" onclick="rate(1)">★</span>
-        <span class="star" onclick="rate(2)">★</span>
-        <span class="star" onclick="rate(3)">★</span>
-        <span class="star" onclick="rate(4)">★</span>
-        <span class="star" onclick="rate(5)">★</span>
-      </div>
-      <textarea id="comment" rows="3" placeholder="Add your comments..."></textarea><br>
-      <button class="submit" onclick="submitRating()">Submit</button>
-      <div class="thank-you" id="thankYouMsg" style="display:none;">Thank you for your feedback!</div>
+  <div class="card" data-id="airport" data-initial="5">
+    <img src="https://images.unsplash.com/photo-1572372815316-fa5474e31ddc?auto=format&fit=crop&q=60&w=600" alt="Kempegowda International Airport Terminal 2">
+    <div class="card-content">
+      <h3>Kempegowda International Airport – Terminal 2</h3>
+      <div class="stars" id="stars-airport"></div>
+      <p>The new Terminal 2 is a masterpiece of architecture and sustainability — designed as a “Terminal in a Garden.”</p>
     </div>
   </div>
 
-  <script>
-    let selectedRating = 0;
-    let currentProject = '';
+  <div class="card" data-id="expressway" data-initial="4.5">
+    <img src="https://images.unsplash.com/photo-1736664122802-725053deb1c6?auto=format&fit=crop&q=60&w=600" alt="Bangalore–Mysore Expressway (NH-275)">
+    <div class="card-content">
+      <h3>Bangalore–Mysore Expressway (NH-275)</h3>
+      <div class="stars" id="stars-expressway"></div>
+      <p>The 118 km expressway reduces travel time between Bengaluru and Mysuru to under 90 minutes — a game-changer for commuters.</p>
+    </div>
+  </div>
+</main>
 
-    function openModal(projectName) {
-      currentProject = projectName;
-      document.getElementById('projectTitle').innerText = projectName;
-      document.getElementById('ratingModal').style.display = 'block';
-      document.getElementById('thankYouMsg').style.display = 'none';
-      document.querySelectorAll('.star').forEach(s => s.classList.remove('selected'));
-      selectedRating = 0;
-      document.getElementById('comment').value = '';
-    }
+<footer>
+  © 2025 StreetCred. All rights reserved.
+</footer>
 
-    function closeModal() {
-      document.getElementById('ratingModal').style.display = 'none';
-    }
+<script>
+const projects = [
+  { id: "metro", name: "Bangalore Metro – Purple Line Extension" },
+  { id: "airport", name: "Kempegowda International Airport – Terminal 2" },
+  { id: "expressway", name: "Bangalore–Mysore Expressway" }
+];
 
-    function rate(starCount) {
-      selectedRating = starCount;
-      document.querySelectorAll('.star').forEach((s, i) => {
-        s.classList.toggle('selected', i < starCount);
-      });
-    }
+projects.forEach(project => {
+  const card = document.querySelector(`[data-id="${project.id}"]`);
+  const container = document.getElementById(`stars-${project.id}`);
+  const stored = JSON.parse(localStorage.getItem(project.id)) || { sum: 0, count: 0 };
+  const initial = parseFloat(card.dataset.initial);
+  const avg = stored.count > 0 ? (stored.sum / stored.count).toFixed(1) : initial.toFixed(1);
+  
+  renderStars(container, avg, project.id);
+});
 
-    function submitRating() {
-      if (selectedRating === 0) {
-        alert("Please select a star rating!");
-        return;
-      }
-      const comment = document.getElementById('comment').value;
-      const feedback = {
-        project: currentProject,
-        rating: selectedRating,
-        comment: comment
-      };
-      // Store locally for now
-      localStorage.setItem('feedback_' + currentProject, JSON.stringify(feedback));
+function renderStars(container, avg, id) {
+  container.innerHTML = '';
+  const rounded = Math.round(avg);
+  for (let i = 1; i <= 5; i++) {
+    const star = document.createElement('span');
+    star.textContent = i <= rounded ? '⭐' : '☆';
+    star.addEventListener('click', () => handleRating(id, i, container));
+    container.appendChild(star);
+  }
+  const text = document.createElement('span');
+  text.textContent = ` (${avg})`;
+  text.style.marginLeft = '5px';
+  container.appendChild(text);
+}
 
-      document.getElementById('thankYouMsg').style.display = 'block';
-      setTimeout(closeModal, 2000);
-    }
+function handleRating(id, rating, container) {
+  const stored = JSON.parse(localStorage.getItem(id)) || { sum: 0, count: 0 };
+  stored.sum += rating;
+  stored.count += 1;
+  localStorage.setItem(id, JSON.stringify(stored));
+  const avg = (stored.sum / stored.count).toFixed(1);
+  renderStars(container, avg, id);
+}
+</script>
 
-    // Close modal if user clicks outside
-    window.onclick = function(event) {
-      const modal = document.getElementById('ratingModal');
-      if (event.target === modal) {
-        closeModal();
-      }
-    }
-  </script>
 </body>
 </html>
-
