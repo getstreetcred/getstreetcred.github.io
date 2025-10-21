@@ -131,10 +131,27 @@
     }
     .close { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; font-weight: bold; color: #333; cursor: pointer; }
     .modal-content h3 { margin-bottom: 1rem; }
-    .modal-content .star-select { font-size: 1.8rem; cursor: pointer; color: #ccc; }
-    .modal-content .star-select.hover, .modal-content .star-select.selected { color: #fbc02d; }
-    .modal-content textarea { width: 90%; height: 60px; margin-top: 10px; border-radius: 5px; padding: 0.5rem; border: 1px solid #ccc; resize: none; }
-    .modal-content button.submit { margin-top: 10px; padding: 0.5rem 1rem; border: none; border-radius: 5px; background-color: #0d1b2a; color: #fff; cursor: pointer; font-weight: bold; }
+    .modal-content .star-select {
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #ccc; /* default gray */
+      transition: color 0.2s ease;
+    }
+    .modal-content .star-select.hover,
+    .modal-content .star-select.selected {
+      color: #fbc02d; /* gold when hovered/selected */
+    }
+    .modal-content textarea {
+      width: 90%; height: 60px; margin-top: 10px;
+      border-radius: 5px; padding: 0.5rem;
+      border: 1px solid #ccc; resize: none;
+    }
+    .modal-content button.submit {
+      margin-top: 10px; padding: 0.5rem 1rem;
+      border: none; border-radius: 5px;
+      background-color: #0d1b2a; color: #fff;
+      cursor: pointer; font-weight: bold;
+    }
     .modal-content button.submit:hover { background-color: #1b2a48; transition: 0.3s; }
   </style>
 </head>
@@ -229,7 +246,7 @@ function updateAverageStars() {
     const project = card.dataset.project;
     const avgElem = card.querySelector(".stars");
     let avg = parseFloat(avgElem.dataset.average) || 0;
-    if(stored[project] && stored[project].length > 0){
+    if (stored[project] && stored[project].length > 0) {
       const ratings = stored[project].map(r => parseInt(r.rating));
       avg = ratings.reduce((a,b)=>a+b,0)/ratings.length;
     }
@@ -255,7 +272,10 @@ document.querySelectorAll(".card").forEach(card => {
     currentCard = card;
     modalProjectName.textContent = card.dataset.project;
     selectedRating = 0;
-    stars.forEach(s => s.classList.remove("selected", "hover"));
+    stars.forEach(s => {
+      s.classList.remove("selected", "hover");
+      s.style.color = "#ccc"; // reset to gray when modal opens
+    });
     modal.style.display = "block";
   });
 });
@@ -268,12 +288,14 @@ window.onclick = e => { if(e.target === modal) modal.style.display = "none"; };
 stars.forEach(star => {
   star.addEventListener("mouseover", () => {
     const val = parseInt(star.dataset.value);
-    stars.forEach(s => s.classList.toggle("hover", parseInt(s.dataset.value) <= val));
+    stars.forEach(s => s.style.color = parseInt(s.dataset.value) <= val ? "#fbc02d" : "#ccc");
   });
-  star.addEventListener("mouseout", () => stars.forEach(s => s.classList.remove("hover")));
+  star.addEventListener("mouseout", () => {
+    stars.forEach(s => s.style.color = parseInt(s.dataset.value) <= selectedRating ? "#fbc02d" : "#ccc");
+  });
   star.addEventListener("click", () => {
     selectedRating = parseInt(star.dataset.value);
-    stars.forEach(s => s.classList.toggle("selected", parseInt(s.dataset.value) <= selectedRating));
+    stars.forEach(s => s.style.color = parseInt(s.dataset.value) <= selectedRating ? "#fbc02d" : "#ccc");
   });
 });
 
@@ -292,8 +314,6 @@ document.getElementById("submitRating").addEventListener("click", () => {
   updateAverageStars();
 });
 </script>
-
 </body>
 </html>
-
 
