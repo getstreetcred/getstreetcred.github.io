@@ -203,7 +203,7 @@
   </div>
   <div class="center">
     <input type="text" placeholder="Search projects..." class="search-bar">
-    </div>
+  </div>
   <div class="right">
     <button>Featured</button>
     <button>Sign In</button>
@@ -268,11 +268,11 @@
     <span class="close">&times;</span>
     <h3 id="modalProjectName">Project Name</h3>
     <div id="starContainer">
-              <span class="star-select" data-value="1">★</span>
-      <span class="star-select" data-value="2">★</span>
-      <span class="star-select" data-value="3">★</span>
-      <span class="star-select" data-value="4">★</span>
-      <span class="star-select" data-value="5">★</span>
+      <span class="star-select" data-value="1">⭐</span>
+      <span class="star-select" data-value="2">⭐</span>
+      <span class="star-select" data-value="3">⭐</span>
+      <span class="star-select" data-value="4">⭐</span>
+      <span class="star-select" data-value="5">⭐</span>
     </div>
     <textarea id="comment" placeholder="Leave a comment (optional)"></textarea>
     <button class="submit" id="submitRating">Rate</button>
@@ -294,11 +294,13 @@ document.querySelectorAll(".card").forEach(card => {
     modalProjectName.textContent = card.dataset.project;
     selectedRating = 0;
     
-    // **FIX 2/2: Added reset for the 'hover' class and comment box for clean UX**
+    // 🌟 FIX: Reset both 'selected' and 'hover' classes to ensure stars start unhighlighted
     stars.forEach(s => {
-        s.classList.remove("selected");
-        s.classList.remove("hover"); // Ensure no residual hover state is gold
-    });
+      s.classList.remove("selected");
+      s.classList.remove("hover"); // <-- THIS IS THE CRITICAL FIX
+    });
+    
+    // Also reset comment box for clean UX
     document.getElementById("comment").value = "";
 
     modal.style.display = "block";
