@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>StreetCred - Public Infrastructure Ratings</title>
 
   <!-- Google Analytics -->
@@ -10,8 +10,8 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date());
-    gtag("config", "G-JNXQ6MD58D", { anonymize_ip: true });
+    gtag('js', new Date());
+    gtag('config', 'G-JNXQ6MD58D', { 'anonymize_ip': true });
   </script>
 
   <style>
@@ -22,7 +22,6 @@
       background-color: #e0e0e0;
     }
 
-    /* Top Bar */
     .top-bar {
       background-color: #0d1b2a;
       color: #fff;
@@ -46,11 +45,7 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    .top-bar button:hover {
-      background-color: #fff;
-      color: #0d1b2a;
-      transition: 0.3s;
-    }
+    .top-bar button:hover { background-color: #fff; color: #0d1b2a; transition: 0.3s; }
     .top-bar .search-bar {
       width: 300px;
       padding: 0.3rem 0.6rem;
@@ -60,7 +55,6 @@
       font-size: 0.95rem;
     }
 
-    /* Navigation Bar */
     .nav-bar {
       background-color: #1b2a48;
       color: #fff;
@@ -68,27 +62,11 @@
       justify-content: center;
       padding: 0.7rem 0;
     }
-    .nav-bar ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-      margin: 0;
-      padding: 0;
-    }
-    .nav-bar ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-    }
+    .nav-bar ul { list-style: none; display: flex; gap: 2rem; margin: 0; padding: 0; }
+    .nav-bar ul li a { color: #fff; text-decoration: none; font-weight: bold; }
     .nav-bar ul li a:hover { text-decoration: underline; }
 
-    /* Categories */
-    .categories {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin: 1.5rem 0;
-    }
+    .categories { display: flex; justify-content: center; gap: 1rem; margin: 1.5rem 0; }
     .category {
       padding: 0.5rem 1rem;
       border: 1px solid #0d1b2a;
@@ -98,13 +76,8 @@
       border-radius: 20px;
       font-weight: bold;
     }
-    .category:hover {
-      background-color: #0d1b2a;
-      color: #fff;
-      transition: 0.3s;
-    }
+    .category:hover { background-color: #0d1b2a; color: #fff; transition: 0.3s; }
 
-    /* Projects Grid */
     main {
       max-width: 1000px;
       margin: 0 auto 2rem auto;
@@ -117,57 +90,27 @@
       background-color: #fff;
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
     }
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
-    .card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-    .card-content {
-      padding: 1rem;
-      text-align: center;
-    }
-    .card-content h3 {
-      margin: 0.5rem 0;
-      font-size: 1.25rem;
-    }
-    .card-content p {
-      font-size: 0.95rem;
-      color: #555;
-      margin-top: 0.5rem;
-    }
-    .stars {
-      margin: 0.5rem 0;
-      color: #fbc02d;
-      font-size: 1rem;
-    }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+    .card img { width: 100%; height: 220px; object-fit: cover; }
+    .card-content { padding: 1rem; text-align: center; }
+    .card-content h3 { margin: 0.5rem 0; font-size: 1.25rem; }
+    .card-content p { font-size: 0.95rem; color: #555; margin-top: 0.5rem; }
+    .stars { margin: 0.5rem 0; color: #fbc02d; font-size: 1rem; }
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #0d1b2a;
-      color: #fff;
-    }
+    footer { text-align: center; padding: 1rem; background-color: #0d1b2a; color: #fff; }
 
-    /* Modal */
     .modal {
       display: none;
       position: fixed;
       z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
       overflow: auto;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0,0,0,0.6);
     }
     .modal-content {
       background-color: #fefefe;
@@ -180,214 +123,177 @@
       text-align: center;
       position: relative;
     }
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #333;
-      cursor: pointer;
-    }
-    .modal-content h3 {
-      margin-bottom: 1rem;
-    }
-    .modal-content .star-select {
+    .close { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; font-weight: bold; color: #333; cursor: pointer; }
+    .modal-content h3 { margin-bottom: 1rem; }
+    .star-select {
       font-size: 1.8rem;
       cursor: pointer;
-      color: #ccc;
+      color: #ccc; /* default gray */
       transition: color 0.2s ease;
     }
-    .modal-content .star-select.selected {
-      color: #fbc02d;
-    }
-    .modal-content textarea {
-      width: 90%;
-      height: 60px;
-      margin-top: 10px;
-      border-radius: 5px;
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      resize: none;
-    }
-    .modal-content button.submit {
-      margin-top: 10px;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 5px;
-      background-color: #0d1b2a;
-      color: #fff;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .modal-content button.submit:hover {
-      background-color: #1b2a48;
-      transition: 0.3s;
+    .star-select.selected {
+      color: #fbc02d; /* gold */
     }
   </style>
 </head>
 <body>
-  <!-- Top Bar -->
-  <div class="top-bar">
-    <div class="left">
-      <div class="logo">StreetCred</div>
-      <button>Menu</button>
-    </div>
-    <div class="center">
-      <input type="text" placeholder="Search projects..." class="search-bar" />
-    </div>
-    <div class="right">
-      <button>Featured</button>
-      <button>Sign In</button>
-      <button>EN</button>
+
+<div class="top-bar">
+  <div class="left">
+    <div class="logo">StreetCred</div>
+    <button>Menu</button>
+  </div>
+  <div class="center">
+    <input type="text" placeholder="Search projects..." class="search-bar">
+  </div>
+  <div class="right">
+    <button>Featured</button>
+    <button>Sign In</button>
+    <button>EN</button>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Projects</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</div>
+
+<section class="categories">
+  <button class="category">All</button>
+  <button class="category">Metro</button>
+  <button class="category">Airport</button>
+  <button class="category">Expressway</button>
+</section>
+
+<main>
+  <div class="card" data-project="Bangalore Metro – Purple Line Extension">
+    <img src="https://images.unsplash.com/photo-1643467220785-49612855af5a?auto=format&fit=crop&q=60&w=600" alt="Bangalore Metro – Purple Line Extension">
+    <div class="card-content">
+      <h3>Bangalore Metro – Purple Line Extension</h3>
+      <div class="stars" data-average="4.0"></div>
+      <p>Clean, modern, and efficient. A big step forward for city commuting.</p>
     </div>
   </div>
 
-  <!-- Navigation Bar -->
-  <div class="nav-bar">
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Projects</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </div>
-
-  <!-- Project Categories -->
-  <section class="categories">
-    <button class="category">All</button>
-    <button class="category">Metro</button>
-    <button class="category">Airport</button>
-    <button class="category">Expressway</button>
-  </section>
-
-  <main>
-    <div class="card" data-project="Bangalore Metro – Purple Line Extension">
-      <img src="https://images.unsplash.com/photo-1643467220785-49612855af5a?auto=format&fit=crop&q=60&w=600" alt="Bangalore Metro – Purple Line Extension" />
-      <div class="card-content">
-        <h3>Bangalore Metro – Purple Line Extension</h3>
-        <div class="stars" data-average="4.0"></div>
-        <p>Clean, modern, and efficient. A big step forward for city commuting.</p>
-      </div>
-    </div>
-
-    <div class="card" data-project="Kempegowda International Airport – Terminal 2">
-      <img src="https://images.unsplash.com/photo-1572372815316-fa5474e31ddc?auto=format&fit=crop&q=60&w=600" alt="Kempegowda International Airport Terminal 2" />
-      <div class="card-content">
-        <h3>Kempegowda International Airport – Terminal 2</h3>
-        <div class="stars" data-average="5.0"></div>
-        <p>Designed as a “Terminal in a Garden” for global travelers.</p>
-      </div>
-    </div>
-
-    <div class="card" data-project="Bangalore–Mysore Expressway (NH-275)">
-      <img src="https://images.unsplash.com/photo-1736664122802-725053deb1c6?auto=format&fit=crop&q=60&w=600" alt="Bangalore–Mysore Expressway (NH-275)" />
-      <div class="card-content">
-        <h3>Bangalore–Mysore Expressway (NH-275)</h3>
-        <div class="stars" data-average="4.5"></div>
-        <p>Reduces travel time between Bengaluru and Mysuru to under 90 minutes.</p>
-      </div>
-    </div>
-  </main>
-
-  <footer>© 2025 StreetCred. All rights reserved.</footer>
-
-  <!-- Rating Modal -->
-  <div class="modal" id="ratingModal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3 id="modalProjectName">Project Name</h3>
-      <div id="starContainer">
-        <span class="star-select" data-value="1">⭐</span>
-        <span class="star-select" data-value="2">⭐</span>
-        <span class="star-select" data-value="3">⭐</span>
-        <span class="star-select" data-value="4">⭐</span>
-        <span class="star-select" data-value="5">⭐</span>
-      </div>
-      <textarea id="comment" placeholder="Leave a comment (optional)"></textarea>
-      <button class="submit" id="submitRating">Rate</button>
+  <div class="card" data-project="Kempegowda International Airport – Terminal 2">
+    <img src="https://images.unsplash.com/photo-1572372815316-fa5474e31ddc?auto=format&fit=crop&q=60&w=600" alt="Kempegowda International Airport Terminal 2">
+    <div class="card-content">
+      <h3>Kempegowda International Airport – Terminal 2</h3>
+      <div class="stars" data-average="5.0"></div>
+      <p>Designed as a “Terminal in a Garden” for global travelers.</p>
     </div>
   </div>
 
-  <script>
-    function updateAverageStars() {
-      const stored = JSON.parse(localStorage.getItem("ratings")) || {};
-      document.querySelectorAll(".card").forEach(card => {
-        const project = card.dataset.project;
-        const avgElem = card.querySelector(".stars");
-        let avg = parseFloat(avgElem.dataset.average) || 0;
-        if (stored[project] && stored[project].length > 0) {
-          const ratings = stored[project].map(r => parseInt(r.rating));
-          avg = ratings.reduce((a, b) => a + b, 0) / ratings.length;
-        }
-        const fullStars = Math.round(avg);
-        avgElem.innerHTML = "";
-        for (let i = 1; i <= 5; i++) {
-          avgElem.innerHTML += i <= fullStars ? "⭐" : "☆";
-        }
-        avgElem.innerHTML += ` (${avg.toFixed(1)})`;
-      });
+  <div class="card" data-project="Bangalore–Mysore Expressway (NH-275)">
+    <img src="https://images.unsplash.com/photo-1736664122802-725053deb1c6?auto=format&fit=crop&q=60&w=600" alt="Bangalore–Mysore Expressway (NH-275)">
+    <div class="card-content">
+      <h3>Bangalore–Mysore Expressway (NH-275)</h3>
+      <div class="stars" data-average="4.5"></div>
+      <p>Reduces travel time between Bengaluru and Mysuru to under 90 minutes.</p>
+    </div>
+  </div>
+</main>
+
+<footer>© 2025 StreetCred. All rights reserved.</footer>
+
+<div class="modal" id="ratingModal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3 id="modalProjectName">Project Name</h3>
+    <div id="starContainer">
+      <span class="star-select" data-value="1">⭐</span>
+      <span class="star-select" data-value="2">⭐</span>
+      <span class="star-select" data-value="3">⭐</span>
+      <span class="star-select" data-value="4">⭐</span>
+      <span class="star-select" data-value="5">⭐</span>
+    </div>
+    <textarea id="comment" placeholder="Leave a comment (optional)"></textarea>
+    <button class="submit" id="submitRating">Rate</button>
+  </div>
+</div>
+
+<script>
+function updateAverageStars() {
+  const stored = JSON.parse(localStorage.getItem("ratings")) || {};
+  document.querySelectorAll(".card").forEach(card => {
+    const project = card.dataset.project;
+    const avgElem = card.querySelector(".stars");
+    let avg = parseFloat(avgElem.dataset.average) || 0;
+    if (stored[project] && stored[project].length > 0) {
+      const ratings = stored[project].map(r => parseInt(r.rating));
+      avg = ratings.reduce((a,b)=>a+b,0)/ratings.length;
     }
-    updateAverageStars();
+    const fullStars = Math.round(avg);
+    avgElem.innerHTML = "";
+    for(let i=1;i<=5;i++){
+      avgElem.innerHTML += i <= fullStars ? "⭐" : "☆";
+    }
+    avgElem.innerHTML += ` (${avg.toFixed(1)})`;
+  });
+}
+updateAverageStars();
 
-    const modal = document.getElementById("ratingModal");
-    const modalProjectName = document.getElementById("modalProjectName");
-    const stars = document.querySelectorAll(".star-select");
-    let selectedRating = 0;
-    let currentCard = null;
+const modal = document.getElementById("ratingModal");
+const modalProjectName = document.getElementById("modalProjectName");
+const stars = document.querySelectorAll(".star-select");
+let selectedRating = 0;
+let currentCard = null;
 
-    // Open modal
-    document.querySelectorAll(".card").forEach(card => {
-      card.addEventListener("click", () => {
-        currentCard = card;
-        modalProjectName.textContent = card.dataset.project;
-        selectedRating = 0;
-        stars.forEach(s => {
-          s.classList.remove("selected");
-          s.style.color = "#ccc"; // Reset all to gray
-        });
-        modal.style.display = "block";
-      });
+// ✅ Open modal
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("click", () => {
+    currentCard = card;
+    modalProjectName.textContent = card.dataset.project;
+    selectedRating = 0;
+    // Force reset stars properly
+    stars.forEach(s => {
+      s.classList.remove("selected");
+      s.style.color = "#ccc";
     });
+    modal.style.display = "block";
+  });
+});
 
-    // Close modal
-    document.querySelector(".close").addEventListener("click", () => modal.style.display = "none");
-    window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
+// Close modal
+document.querySelector(".close").addEventListener("click", () => modal.style.display = "none");
+window.onclick = e => { if(e.target === modal) modal.style.display = "none"; };
 
-    // Star hover + click logic
-    stars.forEach(star => {
-      star.addEventListener("mouseover", () => {
-        const val = parseInt(star.dataset.value);
-        stars.forEach(s => s.style.color = parseInt(s.dataset.value) <= val ? "#fbc02d" : "#ccc");
-      });
-      star.addEventListener("mouseout", () => {
-        stars.forEach(s => s.style.color = parseInt(s.dataset.value) <= selectedRating ? "#fbc02d" : "#ccc");
-      });
-      star.addEventListener("click", () => {
-        selectedRating = parseInt(star.dataset.value);
-        stars.forEach(s => s.style.color = parseInt(s.dataset.value) <= selectedRating ? "#fbc02d" : "#ccc");
-      });
-    });
+// Hover and select
+stars.forEach(star => {
+  star.addEventListener("mouseover", () => {
+    const val = parseInt(star.dataset.value);
+    stars.forEach(s => s.style.color = parseInt(s.dataset.value) <= val ? "#fbc02d" : "#ccc");
+  });
+  star.addEventListener("mouseout", () => {
+    stars.forEach(s => s.style.color = parseInt(s.dataset.value) <= selectedRating ? "#fbc02d" : "#ccc");
+  });
+  star.addEventListener("click", () => {
+    selectedRating = parseInt(star.dataset.value);
+    stars.forEach(s => s.style.color = parseInt(s.dataset.value) <= selectedRating ? "#fbc02d" : "#ccc");
+  });
+});
 
-    // Submit rating
-    document.getElementById("submitRating").addEventListener("click", () => {
-      if (selectedRating === 0) {
-        alert("Please select a rating!");
-        return;
-      }
-      const project = currentCard.dataset.project;
-      const comment = document.getElementById("comment").value;
-      const stored = JSON.parse(localStorage.getItem("ratings")) || {};
-      if (!stored[project]) stored[project] = [];
-      stored[project].push({ rating: selectedRating, comment });
-      localStorage.setItem("ratings", JSON.stringify(stored));
-      alert("Thanks for rating! Refresh to see updated average.");
-      modal.style.display = "none";
-      document.getElementById("comment").value = "";
-      updateAverageStars();
-    });
-  </script>
+// Submit rating
+document.getElementById("submitRating").addEventListener("click", () => {
+  if(selectedRating === 0){ alert("Please select a rating!"); return; }
+  const project = currentCard.dataset.project;
+  const comment = document.getElementById("comment").value;
+  const stored = JSON.parse(localStorage.getItem("ratings")) || {};
+  if(!stored[project]) stored[project] = [];
+  stored[project].push({rating: selectedRating, comment});
+  localStorage.setItem("ratings", JSON.stringify(stored));
+  alert("Thanks for rating! Refresh to see updated average.");
+  modal.style.display = "none";
+  document.getElementById("comment").value = "";
+  updateAverageStars();
+});
+</script>
 </body>
 </html>
+
 
 
