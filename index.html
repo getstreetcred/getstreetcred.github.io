@@ -19,12 +19,15 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #e0e0e0;
+      background-color: #e0e0e0; /* Light gray background */
     }
+
+    /* Your other CSS styles continue here... */
+
 
     /* Top Bar */
     .top-bar {
-      background-color: #0d1b2a;
+      background-color: #0d1b2a; /* Dark blue theme */
       color: #fff;
       display: flex;
       justify-content: space-between;
@@ -60,7 +63,7 @@
     }
 
     .top-bar .search-bar {
-      width: 300px;
+      width: 300px; /* Long search bar */
       padding: 0.3rem 0.6rem;
       border-radius: 5px;
       border: none;
@@ -70,7 +73,7 @@
 
     /* Navigation Bar */
     .nav-bar {
-      background-color: #1b2a48;
+      background-color: #1b2a48; /* Slightly lighter dark blue */
       color: #fff;
       display: flex;
       justify-content: center;
@@ -168,7 +171,6 @@
       margin: 0.5rem 0;
       color: #fbc02d;
       font-size: 1rem;
-      cursor: pointer;
     }
 
     /* Footer */
@@ -218,34 +220,34 @@
 
 <main>
   <!-- Bangalore Metro -->
-  <div class="card" data-project="metro" data-default="4">
+  <div class="card">
     <img src="https://images.unsplash.com/photo-1643467220785-49612855af5a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFuZ2Fsb3JlJTIwbWV0cm98ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" 
          alt="Bangalore Metro – Purple Line Extension">
     <div class="card-content">
       <h3>Bangalore Metro – Purple Line Extension</h3>
-      <div class="stars" onclick="rateProject('metro')">⭐ ⭐ ⭐ ⭐ ☆ (<span class="avg">4.0</span>)</div>
+      <div class="stars">⭐ ⭐ ⭐ ⭐ ☆ (4.0)</div>
       <p>Clean, modern, and efficient. A big step forward for city commuting, connecting Whitefield to Challaghatta.</p>
     </div>
   </div>
 
   <!-- Kempegowda International Airport -->
-  <div class="card" data-project="airport" data-default="5">
+  <div class="card">
     <img src="https://images.unsplash.com/photo-1572372815316-fa5474e31ddc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFuZ2Fsb3JlJTIwYWlycG9ydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" 
          alt="Kempegowda International Airport Terminal 2">
     <div class="card-content">
       <h3>Kempegowda International Airport – Terminal 2</h3>
-      <div class="stars" onclick="rateProject('airport')">⭐ ⭐ ⭐ ⭐ ⭐ (<span class="avg">5.0</span>)</div>
+      <div class="stars">⭐ ⭐ ⭐ ⭐ ⭐ (5.0)</div>
       <p>The new Terminal 2 is a masterpiece of architecture and sustainability — designed as a “Terminal in a Garden” for global travelers.</p>
     </div>
   </div>
 
   <!-- Bangalore–Mysore Expressway -->
-  <div class="card" data-project="expressway" data-default="4.5">
+  <div class="card">
     <img src="https://images.unsplash.com/photo-1736664122802-725053deb1c6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGJhbmdhbG9yZSUyMG15c29yZSUyMGV4cHJlc3N3YXl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" 
          alt="Bangalore–Mysore Expressway (NH-275)">
     <div class="card-content">
       <h3>Bangalore–Mysore Expressway (NH-275)</h3>
-      <div class="stars" onclick="rateProject('expressway')">⭐ ⭐ ⭐ ⭐ ☆ (<span class="avg">4.5</span>)</div>
+      <div class="stars">⭐ ⭐ ⭐ ⭐ ☆ (4.5)</div>
       <p>The 118 km access-controlled expressway reduces travel time between Bengaluru and Mysuru to under 90 minutes — a game-changer for commuters and logistics.</p>
     </div>
   </div>
@@ -254,52 +256,104 @@
 <footer>
   © 2025 StreetCred. All rights reserved.
 </footer>
+<!-- Rating Modal -->
+<div class="modal" id="ratingModal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3 id="modalProjectName">Project Name</h3>
+    <div id="starContainer">
+      <span class="star-select" data-value="1">⭐</span>
+      <span class="star-select" data-value="2">⭐</span>
+      <span class="star-select" data-value="3">⭐</span>
+      <span class="star-select" data-value="4">⭐</span>
+      <span class="star-select" data-value="5">⭐</span>
+    </div>
+    <textarea id="comment" placeholder="Leave a comment (optional)"></textarea>
+    <button class="submit" id="submitRating">Rate</button>
+  </div>
+</div>
 
 <script>
-  // Initialize localStorage if not present
-  const projects = ['metro','airport','expressway'];
-  projects.forEach(proj => {
-    if(!localStorage.getItem(proj)){
-      localStorage.setItem(proj, JSON.stringify({ratings:[parseFloat(document.querySelector(`[data-project="${proj}"]`).dataset.default)]}));
-    }
-    updateDisplay(proj);
+  const modal = document.getElementById("ratingModal");
+  const modalProjectName = document.getElementById("modalProjectName");
+  const starContainer = document.getElementById("starContainer");
+  const stars = starContainer.querySelectorAll(".star-select");
+  let selectedRating = 0;
+  let currentCard = null;
+
+  // Open modal on card click
+  document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", () => {
+      currentCard = card;
+      modalProjectName.textContent = card.dataset.project;
+      selectedRating = 0;
+      stars.forEach(s => s.classList.remove("selected"));
+      modal.style.display = "block";
+    });
   });
 
-  function rateProject(proj){
-    let rating = prompt("Rate this project (1 to 5 stars):");
-    rating = parseInt(rating);
-    if(!rating || rating < 1 || rating > 5){
-      alert("Invalid rating. Please enter a number from 1 to 5.");
-      return;
-    }
+  // Close modal
+  document.querySelector(".close").addEventListener("click", () => modal.style.display = "none");
+  window.onclick = event => { if(event.target == modal) modal.style.display = "none"; };
 
-    // Get current ratings
-    let data = JSON.parse(localStorage.getItem(proj));
-    data.ratings.push(rating);
-    localStorage.setItem(proj, JSON.stringify(data));
+  // Star hover and click
+  stars.forEach(star => {
+    star.addEventListener("mouseover", () => {
+      const val = star.dataset.value;
+      stars.forEach(s => s.classList.toggle("hover", s.dataset.value <= val));
+    });
+    star.addEventListener("mouseout", () => stars.forEach(s => s.classList.remove("hover")));
+    star.addEventListener("click", () => {
+      selectedRating = star.dataset.value;
+      stars.forEach(s => s.classList.toggle("selected", s.dataset.value <= selectedRating));
+    });
+  });
 
-    // Update display
-    updateDisplay(proj);
-  }
-
-  function updateDisplay(proj){
-    let data = JSON.parse(localStorage.getItem(proj));
-    let sum = data.ratings.reduce((a,b)=>a+b,0);
-    let avg = (sum / data.ratings.length).toFixed(1);
-    document.querySelector(`[data-project="${proj}"] .avg`).innerText = avg;
-
-    // Update stars display
-    let starsElem = document.querySelector(`[data-project="${proj}"] .stars`);
-    let fullStars = Math.floor(avg);
-    let half = avg - fullStars >= 0.5 ? 1 : 0;
-    let empty = 5 - fullStars - half;
-    let stars = '⭐'.repeat(fullStars);
-    if(half) stars += '☆';
-    stars += '☆'.repeat(empty);
-    starsElem.childNodes[0].textContent = stars;
-  }
+  // Submit rating
+  document.getElementById("submitRating").addEventListener("click", () => {
+    if(selectedRating === 0){ alert("Please select a rating!"); return; }
+    const comment = document.getElementById("comment").value;
+    const project = currentCard.dataset.project;
+    const stored = JSON.parse(localStorage.getItem("ratings")) || {};
+    if(!stored[project]) stored[project] = [];
+    stored[project].push({rating: selectedRating, comment});
+    localStorage.setItem("ratings", JSON.stringify(stored));
+    alert("Thanks for rating!");
+    modal.style.display = "none";
+    document.getElementById("comment").value = "";
+  });
 </script>
+
+<style>
+  /* Modal styles only — do not alter existing site styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 1.5rem;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+  }
+  .close { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; font-weight: bold; color: #333; cursor: pointer; }
+  .modal-content h3 { margin-bottom: 1rem; }
+  .modal-content .star-select { font-size: 1.8rem; cursor: pointer; color: #ccc; }
+  .modal-content .star-select.hover, .modal-content .star-select.selected { color: #fbc02d; }
+  .modal-content textarea { width: 90%; height: 60px; margin-top: 10px; border-radius: 5px; padding: 0.5rem; border: 1px solid #ccc; resize: none; }
+  .modal-content button.submit { margin-top: 10px; padding: 0.5rem 1rem; border: none; border-radius: 5px; background-color: #0d1b2a; color: #fff; cursor: pointer; font-weight: bold; }
+  .modal-content button.submit:hover { background-color: #1b2a48; transition: 0.3s; }
+</style>
 
 </body>
 </html>
-
