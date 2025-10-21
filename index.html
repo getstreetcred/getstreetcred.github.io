@@ -208,7 +208,7 @@
     <button>Featured</button>
     <button>Sign In</button>
     <button>EN</button>
-  </div>
+    </div>
 </div>
 
 <div class="nav-bar">
@@ -294,15 +294,15 @@ document.querySelectorAll(".card").forEach(card => {
     modalProjectName.textContent = card.dataset.project;
     selectedRating = 0;
     
-    // 🌟 FIX: Reset both 'selected' and 'hover' classes to ensure stars start unhighlighted
+    // ⭐ FIX: Remove both 'selected' and 'hover' classes to ensure the stars are gray on open.
     stars.forEach(s => {
       s.classList.remove("selected");
-      s.classList.remove("hover"); // <-- THIS IS THE CRITICAL FIX
+      s.classList.remove("hover"); // <-- Added this line
     });
-    
-    // Also reset comment box for clean UX
-    document.getElementById("comment").value = "";
 
+    // Clear the comment box for a clean form
+    document.getElementById("comment").value = ""; 
+    
     modal.style.display = "block";
   });
 });
@@ -345,10 +345,4 @@ document.getElementById("submitRating").addEventListener("click", () => {
 
 </body>
 </html>
-
-
-
-
-
-
 
