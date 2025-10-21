@@ -22,6 +22,7 @@
       background-color: #e0e0e0;
     }
 
+    /* Top Bar */
     .top-bar {
       background-color: #0d1b2a;
       color: #fff;
@@ -67,6 +68,7 @@
       font-size: 0.95rem;
     }
 
+    /* Navigation Bar */
     .nav-bar {
       background-color: #1b2a48;
       color: #fff;
@@ -93,6 +95,7 @@
       text-decoration: underline;
     }
 
+    /* Categories */
     .categories {
       display: flex;
       justify-content: center;
@@ -116,6 +119,7 @@
       transition: 0.3s;
     }
 
+    /* Projects Grid */
     main {
       max-width: 1000px;
       margin: 0 auto 2rem auto;
@@ -167,11 +171,7 @@
       cursor: pointer;
     }
 
-    .stars span:hover,
-    .stars span:hover ~ span {
-      color: #ddd;
-    }
-
+    /* Footer */
     footer {
       text-align: center;
       padding: 1rem;
@@ -217,30 +217,36 @@
 </section>
 
 <main>
-  <div class="card" data-id="metro" data-initial="4">
-    <img src="https://images.unsplash.com/photo-1643467220785-49612855af5a?auto=format&fit=crop&q=60&w=600" alt="Bangalore Metro – Purple Line Extension">
+  <!-- Bangalore Metro -->
+  <div class="card" data-project="metro" data-default="4">
+    <img src="https://images.unsplash.com/photo-1643467220785-49612855af5a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFuZ2Fsb3JlJTIwbWV0cm98ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" 
+         alt="Bangalore Metro – Purple Line Extension">
     <div class="card-content">
       <h3>Bangalore Metro – Purple Line Extension</h3>
-      <div class="stars" id="stars-metro"></div>
+      <div class="stars" onclick="rateProject('metro')">⭐ ⭐ ⭐ ⭐ ☆ (<span class="avg">4.0</span>)</div>
       <p>Clean, modern, and efficient. A big step forward for city commuting, connecting Whitefield to Challaghatta.</p>
     </div>
   </div>
 
-  <div class="card" data-id="airport" data-initial="5">
-    <img src="https://images.unsplash.com/photo-1572372815316-fa5474e31ddc?auto=format&fit=crop&q=60&w=600" alt="Kempegowda International Airport Terminal 2">
+  <!-- Kempegowda International Airport -->
+  <div class="card" data-project="airport" data-default="5">
+    <img src="https://images.unsplash.com/photo-1572372815316-fa5474e31ddc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFuZ2Fsb3JlJTIwYWlycG9ydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" 
+         alt="Kempegowda International Airport Terminal 2">
     <div class="card-content">
       <h3>Kempegowda International Airport – Terminal 2</h3>
-      <div class="stars" id="stars-airport"></div>
-      <p>The new Terminal 2 is a masterpiece of architecture and sustainability — designed as a “Terminal in a Garden.”</p>
+      <div class="stars" onclick="rateProject('airport')">⭐ ⭐ ⭐ ⭐ ⭐ (<span class="avg">5.0</span>)</div>
+      <p>The new Terminal 2 is a masterpiece of architecture and sustainability — designed as a “Terminal in a Garden” for global travelers.</p>
     </div>
   </div>
 
-  <div class="card" data-id="expressway" data-initial="4.5">
-    <img src="https://images.unsplash.com/photo-1736664122802-725053deb1c6?auto=format&fit=crop&q=60&w=600" alt="Bangalore–Mysore Expressway (NH-275)">
+  <!-- Bangalore–Mysore Expressway -->
+  <div class="card" data-project="expressway" data-default="4.5">
+    <img src="https://images.unsplash.com/photo-1736664122802-725053deb1c6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGJhbmdhbG9yZSUyMG15c29yZSUyMGV4cHJlc3N3YXl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" 
+         alt="Bangalore–Mysore Expressway (NH-275)">
     <div class="card-content">
       <h3>Bangalore–Mysore Expressway (NH-275)</h3>
-      <div class="stars" id="stars-expressway"></div>
-      <p>The 118 km expressway reduces travel time between Bengaluru and Mysuru to under 90 minutes — a game-changer for commuters.</p>
+      <div class="stars" onclick="rateProject('expressway')">⭐ ⭐ ⭐ ⭐ ☆ (<span class="avg">4.5</span>)</div>
+      <p>The 118 km access-controlled expressway reduces travel time between Bengaluru and Mysuru to under 90 minutes — a game-changer for commuters and logistics.</p>
     </div>
   </div>
 </main>
@@ -250,46 +256,50 @@
 </footer>
 
 <script>
-const projects = [
-  { id: "metro", name: "Bangalore Metro – Purple Line Extension" },
-  { id: "airport", name: "Kempegowda International Airport – Terminal 2" },
-  { id: "expressway", name: "Bangalore–Mysore Expressway" }
-];
+  // Initialize localStorage if not present
+  const projects = ['metro','airport','expressway'];
+  projects.forEach(proj => {
+    if(!localStorage.getItem(proj)){
+      localStorage.setItem(proj, JSON.stringify({ratings:[parseFloat(document.querySelector(`[data-project="${proj}"]`).dataset.default)]}));
+    }
+    updateDisplay(proj);
+  });
 
-projects.forEach(project => {
-  const card = document.querySelector(`[data-id="${project.id}"]`);
-  const container = document.getElementById(`stars-${project.id}`);
-  const stored = JSON.parse(localStorage.getItem(project.id)) || { sum: 0, count: 0 };
-  const initial = parseFloat(card.dataset.initial);
-  const avg = stored.count > 0 ? (stored.sum / stored.count).toFixed(1) : initial.toFixed(1);
-  
-  renderStars(container, avg, project.id);
-});
+  function rateProject(proj){
+    let rating = prompt("Rate this project (1 to 5 stars):");
+    rating = parseInt(rating);
+    if(!rating || rating < 1 || rating > 5){
+      alert("Invalid rating. Please enter a number from 1 to 5.");
+      return;
+    }
 
-function renderStars(container, avg, id) {
-  container.innerHTML = '';
-  const rounded = Math.round(avg);
-  for (let i = 1; i <= 5; i++) {
-    const star = document.createElement('span');
-    star.textContent = i <= rounded ? '⭐' : '☆';
-    star.addEventListener('click', () => handleRating(id, i, container));
-    container.appendChild(star);
+    // Get current ratings
+    let data = JSON.parse(localStorage.getItem(proj));
+    data.ratings.push(rating);
+    localStorage.setItem(proj, JSON.stringify(data));
+
+    // Update display
+    updateDisplay(proj);
   }
-  const text = document.createElement('span');
-  text.textContent = ` (${avg})`;
-  text.style.marginLeft = '5px';
-  container.appendChild(text);
-}
 
-function handleRating(id, rating, container) {
-  const stored = JSON.parse(localStorage.getItem(id)) || { sum: 0, count: 0 };
-  stored.sum += rating;
-  stored.count += 1;
-  localStorage.setItem(id, JSON.stringify(stored));
-  const avg = (stored.sum / stored.count).toFixed(1);
-  renderStars(container, avg, id);
-}
+  function updateDisplay(proj){
+    let data = JSON.parse(localStorage.getItem(proj));
+    let sum = data.ratings.reduce((a,b)=>a+b,0);
+    let avg = (sum / data.ratings.length).toFixed(1);
+    document.querySelector(`[data-project="${proj}"] .avg`).innerText = avg;
+
+    // Update stars display
+    let starsElem = document.querySelector(`[data-project="${proj}"] .stars`);
+    let fullStars = Math.floor(avg);
+    let half = avg - fullStars >= 0.5 ? 1 : 0;
+    let empty = 5 - fullStars - half;
+    let stars = '⭐'.repeat(fullStars);
+    if(half) stars += '☆';
+    stars += '☆'.repeat(empty);
+    starsElem.childNodes[0].textContent = stars;
+  }
 </script>
 
 </body>
 </html>
+
