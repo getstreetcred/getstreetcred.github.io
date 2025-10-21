@@ -24,7 +24,7 @@
 
     /* Top Bar */
     .top-bar {
-      background-color: #0d1b2a; /* Dark blue theme */
+      background-color: #0d1b2a;
       color: #fff;
       display: flex;
       justify-content: space-between;
@@ -183,7 +183,10 @@
       text-align: center;
       position: relative;
     }
-    .close { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; font-weight: bold; color: #333; cursor: pointer; }
+    .close { 
+      position: absolute; top: 10px; right: 15px; 
+      font-size: 1.5rem; font-weight: bold; color: #333; cursor: pointer; 
+    }
     .modal-content h3 { margin-bottom: 1rem; }
     .modal-content .star-select { font-size: 1.8rem; cursor: pointer; color: #ccc; }
     .modal-content .star-select.hover, .modal-content .star-select.selected { color: #fbc02d; }
@@ -229,32 +232,35 @@
 </section>
 
 <main>
+  <!-- Bangalore Metro -->
   <div class="card" data-project="Bangalore Metro – Purple Line Extension">
     <img src="https://images.unsplash.com/photo-1643467220785-49612855af5a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFuZ2Fsb3JlJTIwbWV0cm98ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" 
          alt="Bangalore Metro – Purple Line Extension">
     <div class="card-content">
       <h3>Bangalore Metro – Purple Line Extension</h3>
-      <div class="stars" id="Bangalore Metro – Purple Line Extension-stars">⭐ ⭐ ⭐ ⭐ ☆ (4.0)</div>
+      <div class="stars" data-default="4">⭐ ⭐ ⭐ ⭐ ☆ (4.0)</div>
       <p>Clean, modern, and efficient. A big step forward for city commuting, connecting Whitefield to Challaghatta.</p>
     </div>
   </div>
 
+  <!-- Kempegowda International Airport -->
   <div class="card" data-project="Kempegowda International Airport – Terminal 2">
     <img src="https://images.unsplash.com/photo-1572372815316-fa5474e31ddc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFuZ2Fsb3JlJTIwYWlycG9ydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" 
          alt="Kempegowda International Airport Terminal 2">
     <div class="card-content">
       <h3>Kempegowda International Airport – Terminal 2</h3>
-      <div class="stars" id="Kempegowda International Airport – Terminal 2-stars">⭐ ⭐ ⭐ ⭐ ⭐ (5.0)</div>
+      <div class="stars" data-default="5">⭐ ⭐ ⭐ ⭐ ⭐ (5.0)</div>
       <p>The new Terminal 2 is a masterpiece of architecture and sustainability — designed as a “Terminal in a Garden” for global travelers.</p>
     </div>
   </div>
 
+  <!-- Bangalore–Mysore Expressway -->
   <div class="card" data-project="Bangalore–Mysore Expressway (NH-275)">
     <img src="https://images.unsplash.com/photo-1736664122802-725053deb1c6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGJhbmdhbG9yZSUyMG15c29yZSUyMGV4cHJlc3N3YXl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" 
          alt="Bangalore–Mysore Expressway (NH-275)">
     <div class="card-content">
       <h3>Bangalore–Mysore Expressway (NH-275)</h3>
-      <div class="stars" id="Bangalore–Mysore Expressway (NH-275)-stars">⭐ ⭐ ⭐ ⭐ ☆ (4.5)</div>
+      <div class="stars" data-default="4.5">⭐ ⭐ ⭐ ⭐ ☆ (4.5)</div>
       <p>The 118 km access-controlled expressway reduces travel time between Bengaluru and Mysuru to under 90 minutes — a game-changer for commuters and logistics.</p>
     </div>
   </div>
@@ -295,12 +301,7 @@ document.querySelectorAll(".card").forEach(card => {
     currentCard = card;
     modalProjectName.textContent = card.dataset.project;
     selectedRating = 0;
-    // Reset stars
-    stars.forEach(s => {
-      s.classList.remove("selected");
-      s.classList.remove("hover");
-    });
-    document.getElementById("comment").value = "";
+    stars.forEach(s => s.classList.remove("selected"));
     modal.style.display = "block";
   });
 });
@@ -313,14 +314,15 @@ window.onclick = event => { if(event.target == modal) modal.style.display = "non
 stars.forEach(star => {
   star.addEventListener("mouseover", () => {
     const val = parseInt(star.dataset.value);
-    stars.forEach(s => s.classList.toggle("hover", parseInt(s.dataset.value) <= val));
+    stars.forEach(s => {
+      s.classList.toggle("hover", parseInt(s.dataset.value) <= val);
+    });
   });
   star.addEventListener("mouseout", () => stars.forEach(s => s.classList.remove("hover")));
   star.addEventListener("click", () => {
     selectedRating = parseInt(star.dataset.value);
-    stars.forEach(s => s.classList.remove("selected"));
     stars.forEach(s => {
-      if(parseInt(s.dataset.value) <= selectedRating) s.classList.add("selected");
+      s.classList.toggle("selected", parseInt(s.dataset.value) <= selectedRating);
     });
   });
 });
@@ -336,11 +338,13 @@ document.getElementById("submitRating").addEventListener("click", () => {
   localStorage.setItem("ratings", JSON.stringify(stored));
   alert("Thanks for rating! Refresh the page to see updated average rating.");
   modal.style.display = "none";
+  document.getElementById("comment").value = "";
 });
 </script>
 
 </body>
 </html>
+
 
 
 
